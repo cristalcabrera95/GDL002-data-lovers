@@ -4,13 +4,96 @@
     box-sizing: border-box;
     }
     body {
-    background-image: url(https://i.pinimg.com/originals/46/1d/25/461d254f8563f8945ce3a385f289df17.jpg);
+    background-image: url(http://wonderfulengineering.com/wp-content/uploads/2014/09/white-wallpapers-2-610x381.jpg);
     color: #0F58A2;
     font-family: 'Francois One', sans-serif;
     }
     img {
     width: 100%;
     }
+    header {
+        width:100%;
+    }
+     
+    header nav {
+        width:95%;
+        max-width:2500px;
+        margin:5px auto;
+        background:#024959;
+    }
+     
+    .menu_bar {
+        display:none;
+    }
+     
+    header nav ul {
+        overflow:hidden;
+        list-style:none;
+    }
+     
+    header nav ul li {
+        float:left;
+    }
+     
+    header nav ul li a {
+        color:#fff;
+        padding:30px;
+        display:block;
+        text-decoration:none;
+    }
+     
+    header nav ul li span {
+        margin-right:10px;
+    }
+     
+    header nav ul li a:hover {
+        background:#037E8C;
+    }
+     
+    section {
+        padding:20px;
+    }
+     
+    @media screen and (max-width:800px ) {
+        header nav {
+            width:80%;
+            height:100%;
+            left:-100%;
+            margin:0;
+            position: fixed;
+        }
+     
+        header nav ul li {
+            display:block;
+            float:none;
+            border-bottom:1px solid rgba(255,255,255, .3);
+        }
+     
+        .menu_bar {
+            display:block;
+            width:100%;
+            background:#ccc;
+        }
+     
+        .menu_bar .bt-menu {
+            display:block;
+            padding:20px;
+            background:#024959;
+            color:#fff;
+            text-decoration:none;
+            font-weight: bold;
+            font-size:25px;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            box-sizing:border-box;
+        }
+     
+        .menu_bar span {
+            float:right;
+            font-size:40px;
+        }
+    }
+
     .pokemonScreen {
     display: inline-block;
     width: 200px;
@@ -148,17 +231,4 @@
     .button-up:hover {
     border-color: #E43D14;
     }
-    #estadist {
-    padding: 10px;
-    max-width: 50px;
-    margin: 40px;
-    float: right;
-    display: flex;
-    background-color: transparent;
-    border-color: #1489E4;
-    border-radius: 40px;
-    border-width: 5px;
-    }
-    #estadist:hover {
-    border-color: #E43D14;
-    }
+   

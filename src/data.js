@@ -10,65 +10,83 @@ list += pokeList;
 }
 
 function viewPokemon(pokemon) {
-document.getElementById("pokeList").innerHTML = "";
-pokemon.forEach(element => {
-console.log(element.name, element.type);
-document.getElementById("pokeList").innerHTML += "<div id= 'listFil' class ='pokemonScreen'>" + "<img src = '" + element.img + "' />" + " " + element.name + " " + element.num + "</div>";
+  document.getElementById("pokeList").innerHTML = "";
+  pokemon.forEach(element => {
+    console.log(element.name, element.type);
+    document.getElementById("pokeList").innerHTML += "<div id= 'listFil' class ='pokemonScreen'>" + "<img src = '" + element.img + "' />" + " " + element.name + " " + element.num + "</div>";
 
-});
+  });
 }
 
 function filterType(condition) {
-const filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition));
-viewPokemon(filterCond);
+  const filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition));
+  viewPokemon(filterCond);
 }
 
 function filterTypeCount(condition) {
-return filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition)).length;
+  return filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition)).length;
 
 }
 
 function orderAZ() {
-let cambio;
-let pokeD = pokeData;
-for (let y = 0; y < pokeD.length; y++) {
-for (let i = y + 1; i < pokeD.length; i++) {
-if (pokeD[y].name > pokeD[i].name) {
-cambio = pokeD[y];
-pokeD[y] = pokeD[i];
-pokeD[i] = cambio;
-}
-}
-}
-viewPokemon(pokeD);
+  let cambio;
+  let pokeD = pokeData;
+  for (let y = 0; y < pokeD.length; y++) {
+    for (let i = y + 1; i < pokeD.length; i++) {
+      if (pokeD[y].name > pokeD[i].name) {
+        cambio = pokeD[y];
+        pokeD[y] = pokeD[i];
+        pokeD[i] = cambio;
+      }
+    }
+  } 
+  viewPokemon(pokeD);
 }
 
 function orderZA() {
-
-let cambio;
-let pokeD = pokeData;
-for (let y = 0; y < pokeD.length; y++) {
-for (let i = y + 1; i < pokeD.length; i++) {
-if (pokeD[y].name < pokeD[i].name) {
-cambio = pokeD[y];
-pokeD[y] = pokeD[i];
-pokeD[i] = cambio;
-}
-}
-}
-viewPokemon(pokeD);
+  let cambio;
+  let pokeD = pokeData;
+  for (let y = 0; y < pokeD.length; y++) {
+    for (let i = y + 1; i < pokeD.length; i++) {
+      if (pokeD[y].name < pokeD[i].name) {
+        cambio = pokeD[y];
+        pokeD[y] = pokeD[i];
+        pokeD[i] = cambio;
+      }
+    }
+  }
+  viewPokemon(pokeD);
 }
 
 function porcentajePorTipo() {
-let tipos = ["Water", "Fire", "Grass", "Ground", "Rock", "Steel", "Ice", "Electric", "Dragon", "Ghost", "Psychic", "Normal", "Fighting", "Poison", "Bug", "Flying"];
-
-let total = 151;
-let cantidad = 0;
-tipos.forEach(element => {
-cantidad = filterTypeCount(element);
-porncentaje = total / cantidad;
-porncentaje = 100 / porncentaje;
-alert("tipo: " + element + " porcentaje: " + porncentaje + "%");
-});
+  let tipos = ["Water", "Fire", "Grass", "Ground", "Rock", "Ice", "Electric", "Dragon", "Ghost", "Psychic", "Normal", "Fighting", "Poison", "Bug", "Flying"];
+  let total = 151;
+  let cantidad = 0;
+  tipos.forEach(element => {
+    cantidad = filterTypeCount(element);
+    porncentaje = total / cantidad;
+    porncentaje = 100 / porncentaje;
+    alert("tipo: " + element + " porcentaje: " + porncentaje + "%");
+  });
+}
+function pokePorcent(){
+  let dataType = pokeData.type;
+  drawChart(filterTypeCount(element));
 }
 
+
+/*function drawChart(typeWater,typeFire,typeGrass,typeGround,typeRock,typeIce,typeElectric,typeDragon,typeGhost,typePsychic,typeNormal,typeFighting,typePoison,typeBug,typeFlying) {
+  // Define the chart to be drawn.
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Tipo de Pokemon');
+  data.addColumn('number', 'Cantidad de Pokemon');
+  data.addRows([
+    ["Water", ],
+    ["Fire", 0.21],
+    ["Grass", 0.01]
+  ]);
+  // Instantiate and draw the chart.
+        const chart = new google.visualization.BarChart(document.getElementById("grafic"));
+        chart.draw(data, null);
+      }*/
+    
