@@ -1,92 +1,110 @@
 // esta es una función de ejemplo
 // puedes ver como agregamos la función a nuestro objeto global window
 
-
 const pokeData = window.POKEMON.pokemon;
+
 let list = [];
-for (let i = 0; i < pokeData.length; i++) {
-let pokeList = "<div class='pokemonScreen'>" + " <img src='" + pokeData[i].img + "'/>" + "<br>" + pokeData[i].num + "<br> " + pokeData[i].name + "</div>";
-list += pokeList;
-}
+pokeData.forEach(element => {
+  let pokeList =
+    "<div class='pokemonScreen'>" +
+    " <img src='" +
+    element.img +
+    "'/>" +
+    "<br>" +
+    element.num +
+    "<br> " +
+    element.name +
+    "</div>";
+  list += pokeList;
+});
 
 function viewPokemon(pokemon) {
   document.getElementById("pokeList").innerHTML = "";
   pokemon.forEach(element => {
     console.log(element.name, element.type);
-    document.getElementById("pokeList").innerHTML += "<div id= 'listFil' class ='pokemonScreen'>" + "<img src = '" + element.img + "' />" + " " + element.name + " " + element.num + "</div>";
-
+    document.getElementById("pokeList").innerHTML +=
+      "<div id= 'listFil' class ='pokemonScreen'>" +
+      "<img src = '" +
+      element.img +
+      "' />" +
+      " " +
+      element.name +
+      " " +
+      element.num +
+      "</div>";
   });
 }
 
 function filterType(condition) {
-  const filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition));
+  const filterCond = pokeData.filter(
+    pokemon => pokemon.type[0] == condition || pokemon.type[1] == condition
+  );
   viewPokemon(filterCond);
 }
 
 function filterTypeCount(condition) {
-  return filterCond = pokeData.filter(pokemon => (pokemon.type[0] == condition || pokemon.type[1] == condition)).length;
-
+  return (filterCond = pokeData.filter(
+    pokemon => pokemon.type[0] == condition || pokemon.type[1] == condition
+  ).length);
 }
 
 function orderAZ() {
-  let cambio;
-  let pokeD = pokeData;
-  for (let y = 0; y < pokeD.length; y++) {
-    for (let i = y + 1; i < pokeD.length; i++) {
-      if (pokeD[y].name > pokeD[i].name) {
-        cambio = pokeD[y];
-        pokeD[y] = pokeD[i];
-        pokeD[i] = cambio;
-      }
+  let pokeD = pokeData.sort(function(a, b) {
+    if (a.name < b.name) {
+      return -1;
     }
-  } 
+    if (a.name > b.name) {
+      return 1;
+    }
+  });
+
   viewPokemon(pokeD);
 }
 
 function orderZA() {
-  let cambio;
-  let pokeD = pokeData;
-  for (let y = 0; y < pokeD.length; y++) {
-    for (let i = y + 1; i < pokeD.length; i++) {
-      if (pokeD[y].name < pokeD[i].name) {
-        cambio = pokeD[y];
-        pokeD[y] = pokeD[i];
-        pokeD[i] = cambio;
-      }
+  let pokeD = pokeData.sort(function(a, b) {
+    if (a.name > b.name) {
+      return -1;
     }
-  }
+    if (a.name < b.name) {
+      return 1;
+    }
+  });
   viewPokemon(pokeD);
 }
-
-function porcentajePorTipo() {
-  let tipos = ["Water", "Fire", "Grass", "Ground", "Rock", "Ice", "Electric", "Dragon", "Ghost", "Psychic", "Normal", "Fighting", "Poison", "Bug", "Flying"];
-  let total = 151;
-  let cantidad = 0;
-  tipos.forEach(element => {
-    cantidad = filterTypeCount(element);
-    porncentaje = total / cantidad;
-    porncentaje = 100 / porncentaje;
-    alert("tipo: " + element + " porcentaje: " + porncentaje + "%");
-  });
-}
-function pokePorcent(){
-  let dataType = pokeData.type;
-  drawChart(filterTypeCount(element));
+function graphicPok(condition) {
+  let allPoke = 0;
+  let properties = filterType(newData, condition);
+  properties.forEach(pokemon => (allPoke += pokemon));
 }
 
-
-/*function drawChart(typeWater,typeFire,typeGrass,typeGround,typeRock,typeIce,typeElectric,typeDragon,typeGhost,typePsychic,typeNormal,typeFighting,typePoison,typeBug,typeFlying) {
-  // Define the chart to be drawn.
-  const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Tipo de Pokemon');
-  data.addColumn('number', 'Cantidad de Pokemon');
-  data.addRows([
-    ["Water", ],
-    ["Fire", 0.21],
-    ["Grass", 0.01]
+function drawChart() {
+  document.getElementById("pokeList").style.display = "none";
+  let data = google.visualization.arrayToDataTable([
+    ["Task", "Hours per Day"],
+    ["Water", filterTypeCount("Water")],
+    ["Fire", filterTypeCount("Fire")],
+    ["Grass", filterTypeCount("Grass")],
+    ["Ground", filterTypeCount("Ground")],
+    ["Rock", filterTypeCount("Rock")],
+    ["Ice", filterTypeCount("Ice")],
+    ["Electric", filterTypeCount("Electric")],
+    ["Dragon", filterTypeCount("Dragon")],
+    ["Ghost", filterTypeCount("Ghost")],
+    ["Psychic", filterTypeCount("Psychic")],
+    ["Normal", filterTypeCount("Normal")],
+    ["Fighting", filterTypeCount("Fighting")],
+    ["Poison", filterTypeCount("Poison")],
+    ["Bug", filterTypeCount("Bug")],
+    ["Flying", filterTypeCount("Flying")]
   ]);
-  // Instantiate and draw the chart.
-        const chart = new google.visualization.BarChart(document.getElementById("grafic"));
-        chart.draw(data, null);
-      }*/
-    
+  let options = {
+    title: "Cantidad de Pokemon por tipo",
+    pieHole: 0.4
+  };
+
+  let chart = new google.visualization.PieChart(
+    document.getElementById("donutchart")
+  );
+  chart.draw(data, options);
+}
