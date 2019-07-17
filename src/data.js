@@ -72,11 +72,6 @@ function orderZA() {
   });
   viewPokemon(pokeD);
 }
-function graphicPok(condition) {
-  let allPoke = 0;
-  let properties = filterType(newData, condition);
-  properties.forEach(pokemon => (allPoke += pokemon));
-}
 
 function drawChart() {
   document.getElementById("pokeList").style.display = "none";
